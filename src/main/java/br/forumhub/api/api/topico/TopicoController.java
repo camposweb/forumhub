@@ -34,4 +34,12 @@ public class TopicoController {
 
         return ResponseEntity.ok(page);
     }
+
+    @GetMapping("/{id}")
+    @Transactional
+    public ResponseEntity<DetalhamentoTopicoDTO> detalhamentoTopico(@PathVariable Long id) {
+        var topico = topicoRepository.getReferenceById(id);
+
+        return ResponseEntity.ok(new DetalhamentoTopicoDTO(topico));
+    }
 }
