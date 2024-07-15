@@ -19,7 +19,7 @@ public class TopicoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity cadastrarTopico(@RequestBody @Valid TopicoDTO dadosTopico, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<DetalhamentoTopicoDTO> cadastrarTopico(@RequestBody @Valid TopicoDTO dadosTopico, UriComponentsBuilder uriBuilder) {
         var topico = new Topico(dadosTopico);
         topicoRepository.save(topico);
 
@@ -51,5 +51,13 @@ public class TopicoController {
         topico.atualizarTopico(dados);
 
         return ResponseEntity.ok(new DetalhamentoTopicoDTO(topico));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deletarTopico(@PathVariable Long id) {
+        topicoRepository.deleteById(id);
+
+        return ResponseEntity.noContent().build();
     }
 }
