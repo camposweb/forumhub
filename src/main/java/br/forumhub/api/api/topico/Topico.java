@@ -34,4 +34,13 @@ public class Topico {
     private String Autor;
 
     private String curso;
+
+    public Topico(TopicoDTO dadosTopico) {
+        this.titulo = dadosTopico.titulo();
+        this.mensagem = dadosTopico.mensagem();
+        this.dataCriacao = LocalDateTime.now();
+        this.status = true;
+        this.Autor = dadosTopico.autor();
+        this.curso = dadosTopico.curso();
+    }
 }
