@@ -2,12 +2,12 @@ package br.forumhub.api.api.topico;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
@@ -19,12 +19,19 @@ public class TopicoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<DetalhamentoTopicoDTO> cadastrarTopico(@RequestBody @Valid TopicoDTO dadosTopico, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity cadastrarTopico(@RequestBody @Valid TopicoDTO dadosTopico, UriComponentsBuilder uriBuilder) {
         var topico = new Topico(dadosTopico);
         topicoRepository.save(topico);
 
         var uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
 
         return ResponseEntity.created(uri).body(new DetalhamentoTopicoDTO(topico));
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<ListaTopicosDTO>> listarTopicos(@PageableDefault(size = 10, sort = {"dataCriacao"}) Pageable paginacao) {
+        var page = topicoRepository.findByStatusTrue(paginacao).map(ListaTopicosDTO::new);
+
+        return ResponseEntity.ok(page);
     }
 }
