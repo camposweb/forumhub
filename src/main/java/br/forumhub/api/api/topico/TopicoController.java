@@ -37,8 +37,18 @@ public class TopicoController {
 
     @GetMapping("/{id}")
     @Transactional
-    public ResponseEntity<DetalhamentoTopicoDTO> detalhamentoTopico(@PathVariable Long id) {
+    public ResponseEntity<ListaTopicosDTO> detalhamentoTopico(@PathVariable Long id) {
         var topico = topicoRepository.getReferenceById(id);
+
+        return ResponseEntity.ok(new ListaTopicosDTO(topico));
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity<DetalhamentoTopicoDTO> atualizarTopico(@RequestBody @Valid AtualizacaoTopicoDTO dados) {
+        var topico = topicoRepository.getReferenceById(dados.id());
+
+        topico.atualizarTopico(dados);
 
         return ResponseEntity.ok(new DetalhamentoTopicoDTO(topico));
     }
