@@ -4,7 +4,7 @@
 
 ---
 
-Este projeto foi uma desafio (Challenge) proposto na capacitação ONE - Oracle Next Education, promovida pela Oracle 
+Este projeto foi um desafio (Challenge) proposto na capacitação ONE - Oracle Next Education, promovida pela Oracle 
 com a Alura, no qual foi desenvolvida uma API REST de fórum, com as seguintes funcionalidades: Cadastrar tópico, listar,
 atualizar e deletar, além de listar um tópico em específico pelo seu id. Decidi realizar os commits pela
 especificação [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/), uma conversão
