@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.forumhub.api</groupId>
-	<artifactId>api</artifactId>
+	<artifactId>forumhub</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>api</name>
 	<description>FórumHUB API</description>
